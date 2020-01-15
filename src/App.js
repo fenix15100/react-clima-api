@@ -1,8 +1,10 @@
 import React from 'react';
+import Header from './components/Header'
 
 function App() {
+  const titulo = "Clima React"
   return (
-    <h1>Its,works</h1>
+    <Header titulo ={titulo}/>
   );
 }
 
