@@ -1,6 +1,7 @@
 import React,{Fragment} from 'react';
 import Header from './components/Header'
 import Form from './components/Form'
+import CountriesContextComponent from './context/CountriesContextComponent'
 
 function App() {
   const titulo = "Clima React"
@@ -11,7 +12,9 @@ function App() {
         <div className="container">
           <div className="row">
             <div className="col s12 m6">
+            <CountriesContextComponent>
               <Form/>
+            </CountriesContextComponent>
             </div>
           </div>
         </div>
