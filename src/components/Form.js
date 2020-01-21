@@ -3,6 +3,7 @@ import {CountriesContext} from './../context/CountriesContextComponent'
 import AlertError from './AlertError'
 
 //https://stackoverflow.com/questions/49809884/access-react-context-outside-of-render-function
+//https://www.robinwieruch.de/react-hooks-fetch-data
 const Form = () => {
     const contextCountry = useContext(CountriesContext);
     const  [timeQuery,setTimeQuery] = useState({city:'',country:''})
