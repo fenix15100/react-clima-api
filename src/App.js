@@ -19,13 +19,28 @@ function App() {
   //HOOK for retrieve from API data and store them in state timeData
   useEffect(()=>{
     if(isReadyForm===''||isReadyForm==='nok'){
-      console.log("NO ESTOY READY")
+      return
     }else{
-      console.log("READY")
-      setIsReadyForm(initialIsReadyForm)
+      const getTime = async ()=>{
+        try{
+          let url = `http://api.openweathermap.org/data/2.5/weather?q=${timeQuery.city},${timeQuery.country}&APPID=${process.env.REACT_APP_TOKEN_CLIMA}`
+          let request = await fetch(url);
+          let data = await request.json();
+          console.log(data);
+
+
+        }catch(error){
+          console.error(error);
+        }
+  
+      }
+
+      getTime();
+      setIsReadyForm(initialIsReadyForm);
     }
 
-  },[isReadyForm])
+  },[isReadyForm,timeQuery])
+
   return (
     <Fragment>
       <Header titulo ={titulo}/>
