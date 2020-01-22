@@ -1,7 +1,7 @@
-import React,{Fragment,useState, useEffect} from 'react';
-import Header from './components/Header';
-import Form from './components/Form';
+import React, { Fragment, useEffect, useState } from 'react';
 import Clima from './components/Clima';
+import Form from './components/Form';
+import Header from './components/Header';
 
 
 function App() {
@@ -28,7 +28,6 @@ function App() {
           let url = `http://api.openweathermap.org/data/2.5/weather?q=${timeQuery.city},${timeQuery.country}&APPID=${process.env.REACT_APP_TOKEN_CLIMA}`
           let request = await fetch(url);
           let data = await request.json();
-          console.log(data);
           setTimeData(data)
 
         }catch(error){
