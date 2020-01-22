@@ -51,6 +51,7 @@ const Form = ({timeQuery,setTimeQuery,isReadyForm,setIsReadyForm}) => {
                     
                 </div>
                 <div className="input-field col s12">
+                   
                     <select name="country" className="browser-default" 
                         onChange={(e)=>{setTimeQuery({
                             ...timeQuery,

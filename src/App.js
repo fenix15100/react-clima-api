@@ -49,18 +49,16 @@ function App() {
       <div className="contenedor-form">
         <div className="container">
           <div className="row">
-            <div className="col s12 m6">
+            <div className="col s12 m12">
               <Form timeQuery={timeQuery} 
                     setTimeQuery={setTimeQuery}
                     isReadyForm={isReadyForm}
                     setIsReadyForm={setIsReadyForm}                  
                     />
-              
-              <div className="col s12 m6 ">
                 <Clima 
                     timeData={timeData}
                   />
-              </div>
+              
             </div>
           </div>
         </div>
