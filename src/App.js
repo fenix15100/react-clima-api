@@ -1,10 +1,31 @@
-import React,{Fragment} from 'react';
+import React,{Fragment,useState, useEffect} from 'react';
 import Header from './components/Header'
 import Form from './components/Form'
-import CountriesContextComponent from './context/CountriesContextComponent'
 
 function App() {
   const titulo = "Clima React"
+
+  //STATE HOOKS
+  const initialTimequery = {city:'',country:''}
+  const initialIsReadyForm = ''
+  const initialTimeData = {}
+
+  const [timeQuery,setTimeQuery] = useState(initialTimequery)
+  const [isReadyForm,setIsReadyForm] = useState(initialIsReadyForm)
+  const [timeData,setTimeData] = useState(initialTimeData)
+  ////
+
+
+  //HOOK for retrieve from API data and store them in state timeData
+  useEffect(()=>{
+    if(isReadyForm===''||isReadyForm==='nok'){
+      console.log("NO ESTOY READY")
+    }else{
+      console.log("READY")
+      setIsReadyForm(initialIsReadyForm)
+    }
+
+  },[isReadyForm])
   return (
     <Fragment>
       <Header titulo ={titulo}/>
@@ -12,9 +33,10 @@ function App() {
         <div className="container">
           <div className="row">
             <div className="col s12 m6">
-            <CountriesContextComponent>
-              <Form/>
-            </CountriesContextComponent>
+              <Form timeQuery={timeQuery} 
+                    setTimeQuery={setTimeQuery}
+                    isReadyForm={isReadyForm}
+                    setIsReadyForm={setIsReadyForm} />  
             </div>
           </div>
         </div>

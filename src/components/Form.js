@@ -1,19 +1,39 @@
-import React, { useContext, useState, Fragment} from 'react';
-import {CountriesContext} from './../context/CountriesContextComponent'
-import AlertError from './AlertError'
+import React, { useState, Fragment, useEffect} from 'react';
 
-//https://stackoverflow.com/questions/49809884/access-react-context-outside-of-render-function
-//https://www.robinwieruch.de/react-hooks-fetch-data
-const Form = () => {
-    const contextCountry = useContext(CountriesContext);
-    const  [timeQuery,setTimeQuery] = useState({city:'',country:''})
-    const  [errorForm,setErrorForm] = useState('')
-
+const Form = ({timeQuery,setTimeQuery,isReadyForm,setIsReadyForm}) => {
+    
+    const initialCountries = []
+    const [countries,setContries] = useState(initialCountries);
+    
     const handleSubmit=(e)=>{
         e.preventDefault()
-        if(timeQuery.city===''||timeQuery.country==='') setErrorForm('nok')
-        else setErrorForm('ok')
+        if(timeQuery.city===''||timeQuery.country==='') setIsReadyForm('nok')
+        else setIsReadyForm('ok')
     };
+
+    //Load inMountCycle countries from API 
+    useEffect(()=>{
+
+        const getCountries = async ()=>{
+            try{
+                
+                let url = "https://restcountries.eu/rest/v2/all";
+                let request = await fetch(url);
+                let data = await request.json();
+                data.map((value)=>(
+                        setContries((prevState)=>[...prevState,{id:value.alpha2Code,name:value.name}])                
+                ));
+
+            }catch(error){
+                console.error(error)
+            }
+
+           
+        }
+        getCountries();
+
+
+    },[])
 
     return (
         <Fragment>
@@ -21,7 +41,7 @@ const Form = () => {
                 <div className="input-field col s12">
                     <label htmlFor="city">City:</label>
                     <input
-                        onChange={e=>{setTimeQuery({
+                        onChange={(e)=>{setTimeQuery({
                             ...timeQuery,
                             [e.target.name]:e.target.value})}}
                         type="text"
@@ -32,31 +52,30 @@ const Form = () => {
                 </div>
                 <div className="input-field col s12">
                     <select name="country" className="browser-default" 
-                        onChange={e=>{setTimeQuery({
+                        onChange={(e)=>{setTimeQuery({
                             ...timeQuery,
                             [e.target.name]:e.target.value})}}
                     >
                         <option key ="-1"value="" >Seleciona un país</option>
-                        {contextCountry.countries.map(value =>(
+                        {countries.map(value =>(
                             <option key={value.id} value={value.id}>{value.name}</option>             
                         ))     
                         }
                     </select>
+
                 </div>  
                 <div className="input-field col s12">
                     <input type="submit" 
                     className="waves-effect waves-ligth btn-large btn-block yellow accent-4"
-                    value="Buscar Clima" />
-
+                    value="Buscar Clima" 
+                    />
+                    {isReadyForm==='nok'
+                    ? 
+                    <div className="red error">Todos los campos son obligatorios</div>
+                    : 
+                    null}
                 </div>
-            </form>
-            
-            {errorForm==='nok' 
-            ? 
-            <AlertError errors={['Los dos campos son requeridos']}/> 
-            : 
-            null}
-            
+            </form>     
         </Fragment>
     
         
