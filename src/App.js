@@ -1,6 +1,8 @@
 import React,{Fragment,useState, useEffect} from 'react';
-import Header from './components/Header'
-import Form from './components/Form'
+import Header from './components/Header';
+import Form from './components/Form';
+import Clima from './components/Clima';
+
 
 function App() {
   const titulo = "Clima React"
@@ -16,7 +18,7 @@ function App() {
   ////
 
 
-  //HOOK for retrieve from API data and store them in state timeData
+  //HOOK retrieve from API Timedata and store them in state timeData
   useEffect(()=>{
     if(isReadyForm===''||isReadyForm==='nok'){
       return
@@ -27,7 +29,7 @@ function App() {
           let request = await fetch(url);
           let data = await request.json();
           console.log(data);
-
+          setTimeData(data)
 
         }catch(error){
           console.error(error);
@@ -51,7 +53,14 @@ function App() {
               <Form timeQuery={timeQuery} 
                     setTimeQuery={setTimeQuery}
                     isReadyForm={isReadyForm}
-                    setIsReadyForm={setIsReadyForm} />  
+                    setIsReadyForm={setIsReadyForm}                  
+                    />
+              
+              <div className="col s12 m6 ">
+                <Clima 
+                    timeData={timeData}
+                  />
+              </div>
             </div>
           </div>
         </div>

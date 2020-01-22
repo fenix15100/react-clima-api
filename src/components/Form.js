@@ -75,7 +75,8 @@ const Form = ({timeQuery,setTimeQuery,isReadyForm,setIsReadyForm}) => {
                     : 
                     null}
                 </div>
-            </form>     
+            </form>
+                
         </Fragment>
     
         
