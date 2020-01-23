@@ -26,7 +26,7 @@ function App() {
     }else{
       const getTime = async ()=>{
         try{
-          let url = `http://api.openweathermap.org/data/2.5/weather?q=${timeQuery.city},${timeQuery.country}&APPID=${process.env.REACT_APP_TOKEN_CLIMA}`
+          let url = `https://api.openweathermap.org/data/2.5/weather?q=${timeQuery.city},${timeQuery.country}&APPID=${process.env.REACT_APP_TOKEN_CLIMA}`
           let request = await fetch(url);
           let data = await request.json();
           setTimeData(data)
