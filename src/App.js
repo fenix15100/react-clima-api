@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import Clima from './components/Clima';
 import Form from './components/Form';
 import Header from './components/Header';
+import logo from './components/assets/clima.webp';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
         <div className="container">
           <div className="row">
             <div className="col s12 m12">
+              
               <Form timeQuery={timeQuery} 
                     setTimeQuery={setTimeQuery}
                     isReadyForm={isReadyForm}

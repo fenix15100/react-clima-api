@@ -12,7 +12,7 @@ const Clima = ({timeData}) => {
     const kelvin = 273.15;
 
     return ( 
-        <div className="card-panel white col s12 hoverable right">
+        <div className="card-panel pink accent-1 col s12 hoverable right">
             <div className="black-text">
                 <h2>El clima de {name} es: </h2>
                 <p className="temperatura">
